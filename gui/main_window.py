@@ -1,0 +1,77 @@
+import tkinter as tk
+from tkinter import scrolledtext
+import threading
+import queue
+import time
+
+from gui.components import create_main_interface
+from network.connection import NetworkConnection
+from utils.settings import SettingsManager
+from utils.quotes_manager import QuotesManager
+from utils.threading_utils import ThreadSafeMessageHandler
+
+class NetworkGUI:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("自动登录矿大校园网")
+        self.root.geometry("600x600")
+        self.root.resizable(True, True)
+
+        # 首先创建消息队列
+        self.message_queue = queue.Queue()
+
+        # 然后初始化管理器
+        self.thread_handler = ThreadSafeMessageHandler(self)
+        self.settings_manager = SettingsManager()
+        self.quotes_manager = QuotesManager(self.thread_handler)
+
+        # 初始化网络连接
+        self.network_connection = NetworkConnection(self.thread_handler)
+
+        # 创建UI
+        self.ui_components = create_main_interface(self.root, self)
+
+        # 加载设置
+        self.settings_manager.load_settings(self)
+
+        # 启动队列处理
+        self.thread_handler.start_queue_processing()
+
+    def show_Loji_words(self):
+        quote = self.quotes_manager.get_random_quote()
+        self.thread_handler.log_message(f"{quote}")
+
+    def save_settings(self):
+        self.settings_manager.save_settings(self)
+
+    def safe_quit(self):
+        """安全退出程序"""
+        self.root.quit()
+        self.root.destroy()
+
+    def clear_log(self):
+        """清空日志"""
+        self.ui_components['log_text'].config(state=tk.NORMAL)
+        self.ui_components['log_text'].delete(1.0, tk.END)
+        self.ui_components['log_text'].config(state=tk.DISABLED)
+
+    def start_connection_thread(self):
+        """在新线程中启动连接过程"""
+        if self.network_connection.is_connecting:
+            self.thread_handler.log_message("连接正在进行中，请稍候...")
+            return
+
+        # 验证输入
+        account_number = self.ui_components['account_var'].get().strip()
+        password = self.ui_components['password_var'].get()
+
+        if not account_number:
+            import pyautogui as pg
+            pg.alert("请输入账号！", "错误")
+            return
+        if not password:
+            import pyautogui as pg
+            pg.alert("请输入密码！", "错误")
+            return
+
+        self.network_connection.start_connection(account_number, password)
