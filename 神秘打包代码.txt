@@ -1,1 +1,3 @@
-pyinstaller --distpath "D:\coding\project\python\Tools\schoolnet\dist" D:\coding\project\python\Tools\schoolnet\Net_stu_2.spec
+pyinstaller --distpath "D:\coding\project\python\Tools\schoolnet\dist" D:\coding\project\python\Tools\schoolnet\Net_stu.spec
+
+pyinstaller -F -w --add-data "矿大LOGO_1024x1024.ico;." --hidden-import=pyautogui --icon "TFRico_256x256.ico" --name "自动登录校园网" Net_stu.py

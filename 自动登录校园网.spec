@@ -1,10 +1,11 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+
 a = Analysis(
     ['Net_stu.py'],
     pathex=[],
     binaries=[],
-    datas=[('矿大LOGO_1024x1024.ico', '.')],  #添加这一行
+    datas=[('矿大LOGO_1024x1024.ico', '.')],
     hiddenimports=['pyautogui'],
     hookspath=[],
     hooksconfig={},
@@ -21,19 +22,18 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='自动登录校园网',  # 可执行文件名
+    name='自动登录校园网',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
     upx_exclude=[],
     runtime_tmpdir=None,
-    console=False,  # 无控制台窗口
+    console=False,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon= 'TFRico_2048x2048.ico',
-    onefile=True  # 关键修改：打包为单个文件
+    icon=['TFRico_256x256.ico'],
 )
