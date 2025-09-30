@@ -134,7 +134,7 @@ class NetworkGUI:
             # 打包后的路径
             os.path.join(getattr(sys, '_MEIPASS', ''), '矿大LOGO_1024x1024.ico'),
             # 当前目录路径
-            '矿大LOGO_1024x1024.ico',
+            './resource/矿大LOGO_1024x1024.ico',
             # 脚本所在目录路径
             os.path.join(os.path.dirname(os.path.abspath(__file__)), '矿大LOGO_1024x1024.ico'),
         ]

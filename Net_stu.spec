@@ -4,7 +4,7 @@ a = Analysis(
     ['Net_stu.py'],
     pathex=[],
     binaries=[],
-    datas=[('矿大LOGO_1024x1024.ico', '.')],  #添加这一行
+    datas=[('./resource/矿大LOGO_1024x1024.ico', '.')],
     hiddenimports=['pyautogui'],
     hookspath=[],
     hooksconfig={},
@@ -34,6 +34,6 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon= 'TFRico_2048x2048.ico',
-    onefile=True  # 关键修改：打包为单个文件
+    icon= './resource/TFRico_2048x2048.ico',
+    onefile=True  # 打包为单个文件
 )

@@ -1420,6 +1420,7 @@
   ('requests.utils',
    'C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\requests\\utils.py',
    'PYMODULE'),
+  ('resource', '-', 'PYMODULE'),
   ('rlcompleter',
    'C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\rlcompleter.py',
    'PYMODULE'),
