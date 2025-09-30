@@ -1,0 +1,1 @@
+pyinstaller --distpath "D:\coding\project\python\Tools\schoolnet\dist" D:\coding\project\python\Tools\schoolnet\Net_stu_2.spec
