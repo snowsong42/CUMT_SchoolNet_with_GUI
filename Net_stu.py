@@ -163,7 +163,7 @@ class NetworkGUI:
         else:
             # 开发时的路径
             base_path = os.path.dirname(os.path.abspath(__file__))
-        return os.path.join(base_path, "network_settings.json")
+        return os.path.join(base_path, "./UserData/network_settings.json")
 
     def load_settings(self):
         """加载保存的设置"""
@@ -185,9 +185,10 @@ class NetworkGUI:
                 self.log_message("设置加载成功")
             else:
                 # 默认值
-                self.account_var.set("06245011")
-                self.password_var.set("Snowsong_42")
+                self.account_var.set(" ")
+                self.password_var.set(" ")
                 self.log_message("使用默认设置")
+
         except Exception as e:
             self.log_message(f"加载设置失败: {e}")
             # 设置默认值
@@ -304,9 +305,9 @@ class NetworkGUI:
             # 打包后的路径
             os.path.join(getattr(sys, '_MEIPASS', ''), 'Loji_quotes.txt'),
             # 当前目录路径
-            'Loji_quotes.txt',
+            './resource/Loji_quotes.txt',
             # 脚本所在目录路径
-            os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Loji_quotes.txt'),
+            os.path.join(os.path.dirname(os.path.abspath(__file__)), './resource/Loji_quotes.txt'),
         ]
 
         for quote_path in quotes_paths:
