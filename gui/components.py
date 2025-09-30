@@ -3,7 +3,8 @@ from tkinter import scrolledtext
 import os
 import sys
 
-def set_window_icon(root):
+
+def set_window_icon(root, thread_handler):
     """设置窗口图标，支持打包和未打包两种模式"""
 
     # 获取main.py所在的目录
@@ -13,29 +14,38 @@ def set_window_icon(root):
     else:
         # 开发时的情况
         base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
-    
+
     icon_paths = [
         os.path.join(getattr(sys, '_MEIPASS', ''), '矿大LOGO_1024x1024.ico'),  # 打包后的临时目录
-        os.path.join(base_dir, 'resource', '矿大LOGO_1024x1024.ico'),  # 主程序目录下的resources文件夹
+        os.path.join(base_dir, 'resource', '矿大LOGO_1024x1024.ico'),  # 主程序目录下的resource文件夹
         os.path.join(base_dir, '矿大LOGO_1024x1024.ico'),  # 直接在主程序目录
-        './resource/Loji_quotes.txt',  # 相对路径（备用）
+        './resource/矿大LOGO_1024x1024.ico',  # 相对路径（修复了路径错误）
     ]
 
+    icon_loaded = False
     for icon_path in icon_paths:
         try:
             if os.path.exists(icon_path):
                 root.iconbitmap(icon_path)
-                print(f"成功加载图标,从路径: {icon_path}")
-                return
+                # 使用延迟发送消息，确保队列处理已启动
+                root.after(100, lambda path=icon_path: thread_handler.log_message(f"成功加载图标，从路径: {path}"))
+                icon_loaded = True
+                break
         except Exception as e:
-            print(f"尝试加载图标 {icon_path} 失败: {e}")
+            # 使用延迟发送错误消息
+            root.after(100,
+                       lambda path=icon_path, err=e: thread_handler.log_message(f"尝试加载图标 {path} 失败: {err}"))
             continue
 
-    print("警告: 无法加载任何图标文件，将使用默认图标")
+    if not icon_loaded:
+        # 使用延迟发送警告消息
+        root.after(100, lambda: thread_handler.log_message("警告: 无法加载任何图标文件，将使用默认图标"))
 
-def create_main_interface(root, app):
+
+def create_main_interface(root, app, thread_handler):
     """创建主界面组件"""
-    set_window_icon(root)
+    # 延迟设置窗口图标，确保消息队列处理已启动
+    root.after(100, lambda: set_window_icon(root, thread_handler))
 
     components = {}
 

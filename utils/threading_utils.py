@@ -2,7 +2,6 @@ import tkinter as tk
 import time
 import pyautogui as pg
 
-
 class ThreadSafeMessageHandler:
     def __init__(self, app):
         self.app = app

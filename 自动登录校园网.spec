@@ -1,10 +1,10 @@
 # -*- mode: python ; coding: utf-8 -*-
 
 a = Analysis(
-    ['Net_stu.py'],
+    ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('矿大LOGO_1024x1024.ico', '.')],
+    datas=[(./resouce/'矿大LOGO_1024x1024.ico', '.')],
     hiddenimports=['pyautogui'],
     hookspath=[],
     hooksconfig={},
@@ -34,5 +34,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['TFRico_256x256.ico'],
+    icon=['./resouce/TFRico_256x256.ico'],
 )

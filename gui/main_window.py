@@ -29,8 +29,8 @@ class NetworkGUI:
         # 初始化网络连接
         self.network_connection = NetworkConnection(self.thread_handler)
 
-        # 创建UI
-        self.ui_components = create_main_interface(self.root, self)
+        # 创建UI - 传递 thread_handler
+        self.ui_components = create_main_interface(self.root, self, self.thread_handler)
 
         # 加载设置
         self.settings_manager.load_settings(self)
@@ -39,7 +39,7 @@ class NetworkGUI:
         self.thread_handler.start_queue_processing()
 
         # 延迟加载留言，确保队列处理已经启动
-        self.root.after(100, self.delayed_load_quotes)
+        self.root.after(200, self.delayed_load_quotes)
 
     def delayed_load_quotes(self):
         """延迟加载留言，确保消息队列处理已经启动"""
