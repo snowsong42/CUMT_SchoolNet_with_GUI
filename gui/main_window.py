@@ -10,6 +10,7 @@ from utils.settings import SettingsManager
 from utils.quotes_manager import QuotesManager
 from utils.threading_utils import ThreadSafeMessageHandler
 
+
 class NetworkGUI:
     def __init__(self, root):
         self.root = root
@@ -36,6 +37,13 @@ class NetworkGUI:
 
         # 启动队列处理
         self.thread_handler.start_queue_processing()
+
+        # 延迟加载留言，确保队列处理已经启动
+        self.root.after(100, self.delayed_load_quotes)
+
+    def delayed_load_quotes(self):
+        """延迟加载留言，确保消息队列处理已经启动"""
+        self.quotes_manager.load_Loji_quotes()
 
     def show_Loji_words(self):
         quote = self.quotes_manager.get_random_quote()
