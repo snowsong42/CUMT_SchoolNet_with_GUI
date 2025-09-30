@@ -1,19 +1,41 @@
+import requests
 import pyautogui as pg
-pg.hotkey('win','d',interval=0)
-pg.moveTo(39, 292)
-pg.click(x=39, y=292,clicks=1,interval=0,duration=0, button='left')
-pg.press('enter',presses=1,interval=0.2)
 
-pg.write("http://10.2.5.251/",interval=0)
-pg.press('enter',presses=2,interval=0.2)
-pg.PAUSE = 1.0
+url = "http://10.2.5.251/"
 
-pg.moveTo(1379, 343)
-pg.click(x=1379, y=343,clicks=2,interval=0.3,duration=0, button='left')
-pg.write("06245011",interval=0)
-pg.press('tab',presses=1,interval=0)
-pg.write("Snowsong_42",interval=0)
+# 修正data为字典格式
+data = {
+    "c": "Portal",
+    "a": "login",
+    "callback": "dr1759114957067",
+    "login_method": "1",
+    "user_account": "06245011@unicom",
+    "user_password": "Snowsong_42",
+    "wlan_user_ip": "10.3.20.131",
+    "wlan_user_mac": "000000000000",
+    "wlan_ac_ip": "wlan_ac_name",
+    "jsVersion": "3.0",
+    "_": "1759114945966"
+}
 
-pg.click(x=1437 , y=481,clicks=1,interval=0,duration=0, button='left')
-pg.click(x=1440 , y=586,clicks=1,interval=0,duration=0, button='left')
-pg.click(x=1452 , y=533,clicks=1,interval=0,duration=0, button='left')
+# 修正header为字典格式
+header = {
+    "Accept": "*/*",
+    "Accept-Encoding": "gzip, deflate",
+    "Accept-Language": "zh-CN,zh;q=0.9",
+    "Connection": "keep-alive",
+    "Cookie": "PHPSESSID=4kpirs4g4r5es03v8776pdf5d4",
+    "Host": "10.2.5.251:801",
+    "Referer": "http://10.2.5.251/",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+}
+
+try:
+    response = requests.post(url, data=data, headers=header)
+    print(f"POST请求状态码: {response.status_code}")
+
+    x = requests.get(url)
+    arr1 = pg.alert(title='连接成功(oﾟvﾟ)ノ', text=x.reason, button='冲浪，冲！')
+    print(arr1)
+except Exception as e:
+    print(f"发生错误: {e}")
