@@ -13,8 +13,3 @@ datas=[
 
 4.图标
 icon='./resource/TFRico_2048x2048.ico'
-
-（历史遗留代码）
-pyinstaller --distpath "D:\coding\project\python\Tools\schoolnet\dist" D:\coding\project\python\Tools\schoolnet\Net_stu.spec
-
-pyinstaller -F -w --add-data "矿大LOGO_1024x1024.ico;." --hidden-import=pyautogui --icon "TFRico_256x256.ico" --name "自动登录校园网" Net_stu.py
