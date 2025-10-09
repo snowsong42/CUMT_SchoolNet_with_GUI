@@ -46,11 +46,11 @@ class SettingsManager:
                 app.thread_handler.log_message("设置加载成功")
             else:
                 # 默认值
+                app.thread_handler.log_message("找不到配置，使用默认设置")
                 app.ui_components['account_var'].set("")
                 app.ui_components['password_var'].set("")
                 app.ui_components['combobox'].set("")
                 app.ui_components['account_suffix'].config(text="")
-                app.thread_handler.log_message("使用默认设置")
 
         except Exception as e:
             app.thread_handler.log_message(f"加载设置失败: {e}")
