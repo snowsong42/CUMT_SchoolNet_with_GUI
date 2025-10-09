@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 from tkinter import scrolledtext
 import os
 import sys
@@ -6,7 +7,6 @@ import sys
 
 def set_window_icon(root, thread_handler):
     """设置窗口图标，支持打包和未打包两种模式"""
-
     # 获取main.py所在的目录
     if getattr(sys, 'frozen', False):
         # 打包后的情况
@@ -18,8 +18,8 @@ def set_window_icon(root, thread_handler):
     icon_paths = [
         os.path.join(getattr(sys, '_MEIPASS', ''), '矿大LOGO_1024x1024.ico'),  # 打包后的临时目录
         os.path.join(base_dir, 'resource', '矿大LOGO_1024x1024.ico'),  # 主程序目录下的resource文件夹
-        os.path.join(base_dir, '矿大LOGO_1024x1024.ico'),  # 直接在主程序目录
-        './resource/矿大LOGO_1024x1024.ico',  # 相对路径（修复了路径错误）
+        os.path.join(base_dir, '矿大LOGO_1024x1024.ico'),  # 主程序目录
+        './resource/矿大LOGO_1024x1024.ico',
     ]
 
     icon_loaded = False
@@ -76,8 +76,39 @@ def create_main_interface(root, app, thread_handler):
     components['account_entry'] = tk.Entry(account_input_frame, textvariable=components['account_var'], width=15)
     components['account_entry'].pack(side=tk.LEFT)
 
-    account_suffix = tk.Label(account_input_frame, text="@unicom")
-    account_suffix.pack(side=tk.LEFT, padx=(5, 0))
+    # 创建账号后缀标签（初始为空）
+    components['account_suffix'] = tk.Label(account_input_frame, text="")
+    components['account_suffix'].pack(side=tk.LEFT, padx=(5, 0))
+
+    # 下拉选择框 - 放在账号输入框右边
+    components['selected_option'] = tk.StringVar()
+    components['combobox'] = ttk.Combobox(account_input_frame,
+                                          textvariable=components['selected_option'],
+                                          values=["1.移动", "2.联通", "3.电信", "4.校园网"],
+                                          state="readonly",
+                                          width=8)
+    components['combobox'].pack(side=tk.LEFT, padx=(10, 0))
+    components['combobox'].current(0)  # 设置默认值
+
+    # 绑定下拉选择框事件
+    def on_select(event):
+        selected_value = components['combobox'].get()
+        thread_handler.log_message(f"选择了: {selected_value}")
+
+        # 根据选择更新账号后缀
+        if selected_value == "1.移动":
+            components['account_suffix'].config(text="@cmcc")
+        elif selected_value == "2.联通":
+            components['account_suffix'].config(text="@unicom")
+        elif selected_value == "3.电信":
+            components['account_suffix'].config(text="@telecom")
+        elif selected_value == "4.校园网":
+            components['account_suffix'].config(text="")
+
+    components['combobox'].bind("<<ComboboxSelected>>", on_select)
+
+    # 初始化账号后缀
+    on_select(None)  # 触发一次以设置初始后缀
 
     # 密码输入行
     password_frame = tk.Frame(login_frame)

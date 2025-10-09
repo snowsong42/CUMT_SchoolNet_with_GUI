@@ -1,6 +1,6 @@
 import tkinter as tk
+import tkinter.messagebox as messagebox
 import time
-import pyautogui as pg
 
 class ThreadSafeMessageHandler:
     def __init__(self, app):
@@ -53,7 +53,7 @@ class ThreadSafeMessageHandler:
 
     def _show_alert(self, title, text, button):
         """线程安全的弹窗显示（内部方法）"""
-        pg.alert(title=title, text=text, button=button)
+        messagebox.showerror(title=title, text=text, button=button)
 
     def _show_random_quote(self):
         """线程安全的显示随机留言（内部方法）"""

@@ -1,8 +1,6 @@
 import tkinter as tk
-from tkinter import scrolledtext
-import threading
+import tkinter.messagebox as messagebox
 import queue
-import time
 
 from gui.components import create_main_interface
 from network.connection import NetworkConnection
@@ -65,21 +63,41 @@ class NetworkGUI:
 
     def start_connection_thread(self):
         """在新线程中启动连接过程"""
+        # 1. 验证输入
+        # 2. 创建新线程
+        # 3. 在新线程中执行网络连接
         if self.network_connection.is_connecting:
-            self.thread_handler.log_message("连接正在进行中，请稍候...")
+            self.thread_handler.log_message("Now loading...")
             return
 
         # 验证输入
         account_number = self.ui_components['account_var'].get().strip()
         password = self.ui_components['password_var'].get()
 
+        selected_value = self.ui_components['combobox'].get()
+        account_suffix = ""
+        # 根据选择更新账号后缀
+        if selected_value == "1.移动":
+            self.ui_components['account_suffix'].config(text="@cmcc")
+            account_suffix = "@cmcc"
+        elif selected_value == "2.联通":
+            self.ui_components['account_suffix'].config(text="@unicom")
+            account_suffix = "@unicom"
+        elif selected_value == "3.电信":
+            self.ui_components['account_suffix'].config(text="@telecom")
+            account_suffix = "@telecom"
+        elif selected_value == "4.校园网":
+            self.ui_components['account_suffix'].config(text="")
+            account_suffix = ""
+
         if not account_number:
             import pyautogui as pg
-            pg.alert("请输入账号！", "错误")
+            messagebox.showerror("请输入账号！", "错误")
             return
         if not password:
             import pyautogui as pg
-            pg.alert("请输入密码！", "错误")
+            messagebox.showerror("请输入密码！", "错误")
             return
 
-        self.network_connection.start_connection(account_number, password)
+        # 见connection.py
+        self.network_connection.start_connection(account_number, password, account_suffix)
