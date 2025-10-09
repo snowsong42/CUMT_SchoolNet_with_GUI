@@ -10,7 +10,7 @@ class NetworkConnection:
         self.is_connecting = False
 
         # 配置信息
-        self.url = "http://jwxt.cumt.edu.cn/jwglxt/xtgl/login_slogin.html" # 教务系统
+
         self.login_url = "http://10.2.5.251:801/eportal/" # 入口
         self.local_ip = ""
 
@@ -131,28 +131,32 @@ class NetworkConnection:
         except:
             return "无法获取IP"
 
-    def check_internet_connection(self, host="www.baidu.com", port=80, timeout=3):
+    def check_internet_connection(self, timeout=5):
         """检查是否能够连接到百度（外部网络）"""
+        host = "www.baidu.com" #百度
         try:
-            self.thread_handler.log_message(f"\n尝试连接: {host}:{port}")
-            socket.setdefaulttimeout(timeout)
-            socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((host, port))
-            self.thread_handler.log_message(f"✓ 外部网络连接正常\n成功连接到 {host}")
-            return True
-        except socket.error as e:
-            self.thread_handler.log_message(f"✗ 外部网络连接失败\n无法连接到 {host}: {e}")
+            response = requests.get(host, timeout=timeout)
+            if response.status_code == 200:
+                self.thread_handler.log_message(f"✓ 外部网络连接正常\n成功访问 {host}")
+                return True
+            else:
+                self.thread_handler.log_message(f"✗ 外部网络连接异常\n {host} 返回状态码: {response.status_code}")
+                return False
+        except Exception as e:
+            self.thread_handler.log_message(f"✗ 外部网络连接失败\n无法访问 {host}: {e}")
             return False
 
     def check_local_network(self, timeout=5):
         """检查校园网内部网络连接 - 连接到矿大教务系统"""
+        host = "http://jwxt.cumt.edu.cn/jwglxt/xtgl/login_slogin.html" # 教务系统
         try:
-            response = requests.get(self.url, timeout=timeout)
+            response = requests.get(host, timeout=timeout)
             if response.status_code == 200:
-                self.thread_handler.log_message(f"✓ 校园网内部连接正常\n成功访问 {self.url}")
+                self.thread_handler.log_message(f"✓ 校园网内部连接正常\n成功访问 {host}")
                 return True
             else:
-                self.thread_handler.log_message(f"✗ 校园网内部连接异常\n {self.url} 返回状态码: {response.status_code}")
+                self.thread_handler.log_message(f"✗ 校园网内部连接异常\n {host} 返回状态码: {response.status_code}")
                 return False
         except Exception as e:
-            self.thread_handler.log_message(f"✗ 校园网内部连接失败\n无法访问 {self.url}: {e}")
+            self.thread_handler.log_message(f"✗ 校园网内部连接失败\n无法访问 {host}: {e}")
             return False
