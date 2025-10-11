@@ -1,7 +1,6 @@
 import json
 import os
 import sys
-import tkinter.messagebox as messagebox
 
 class SettingsManager:
     def __init__(self):
@@ -94,7 +93,7 @@ class SettingsManager:
             app.thread_handler.log_message("设置保存成功\n账号:"+account_number+self.network_type_mapping[selected_network]+
                                            "\n密码:"+password+
                                            "\n于"+settings_path)
-            #messagebox.showerror("设置已保存！", "成功")
+            #app.thread_handler.show_alert("设置已保存！", "成功")
 
         except Exception as e:
             app.thread_handler.log_message(f"保存设置失败: {e}")

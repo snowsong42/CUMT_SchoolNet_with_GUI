@@ -1,5 +1,4 @@
 import tkinter as tk
-import tkinter.messagebox as messagebox
 import queue
 
 from gui.components import create_main_interface
