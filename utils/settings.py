@@ -82,8 +82,8 @@ class SettingsManager:
             with open(settings_path, 'w', encoding='utf-8') as f:
                 json.dump(settings, f, ensure_ascii=False, indent=2)
 
-            app.thread_handler.log_message("设置保存成功")
-            messagebox.showerror("设置已保存！", "成功")
+            app.thread_handler.log_message("设置保存成功\n账号:"+account_number+self.network_type_mapping[selected_network]+"\n密码:"+password)
+            #messagebox.showerror("设置已保存！", "成功")
 
         except Exception as e:
             app.thread_handler.log_message(f"保存设置失败: {e}")

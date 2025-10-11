@@ -11,18 +11,19 @@ from utils.threading_utils import ThreadSafeMessageHandler
 
 class NetworkGUI:
     def __init__(self, root):
+        # 设置窗口缩放
+        root.tk.call('tk', 'scaling', 1.5)  # 可以调整这个值，1.0是默认，1.5是150%等
         self.root = root
         self.root.title("自动登录矿大校园网")
         self.root.geometry("600x600")
         self.root.resizable(True, True)
 
-        # 首先创建消息队列
+        # 创建消息队列
         self.message_queue = queue.Queue()
-
-        # 然后初始化管理器
+        # 初始化管理器
         self.thread_handler = ThreadSafeMessageHandler(self)
-        self.settings_manager = SettingsManager()
-        self.quotes_manager = QuotesManager(self.thread_handler)
+        # 启动队列处理
+        self.thread_handler.start_queue_processing()
 
         # 初始化网络连接
         self.network_connection = NetworkConnection(self.thread_handler)
@@ -30,18 +31,11 @@ class NetworkGUI:
         # 创建UI - 传递 thread_handler
         self.ui_components = create_main_interface(self.root, self, self.thread_handler)
 
-        # 加载设置
-        self.settings_manager.load_settings(self)
-
-        # 启动队列处理
-        self.thread_handler.start_queue_processing()
-
-        # 延迟加载留言，确保队列处理已经启动
-        self.root.after(200, self.delayed_load_quotes)
-
-    def delayed_load_quotes(self):
-        """延迟加载留言，确保消息队列处理已经启动"""
-        self.quotes_manager.load_Loji_quotes()
+        # 辅助功能
+        self.settings_manager = SettingsManager()
+        self.quotes_manager = QuotesManager(self.thread_handler)
+        self.settings_manager.load_settings(self) # 加载设置
+        self.quotes_manager.load_Loji_quotes() # 加载留言
 
     def show_Loji_words(self):
         quote = self.quotes_manager.get_random_quote()

@@ -4,7 +4,6 @@ from tkinter import scrolledtext
 import os
 import sys
 
-
 def set_window_icon(root, thread_handler):
     """设置窗口图标，支持打包和未打包两种模式"""
     # 获取main.py所在的目录
@@ -27,25 +26,21 @@ def set_window_icon(root, thread_handler):
         try:
             if os.path.exists(icon_path):
                 root.iconbitmap(icon_path)
-                # 使用延迟发送消息，确保队列处理已启动
-                root.after(100, lambda path=icon_path: thread_handler.log_message(f"成功加载图标，从路径: {path}"))
+                thread_handler.log_message(f"成功加载图标，从路径: {icon_path}")
                 icon_loaded = True
                 break
         except Exception as e:
-            # 使用延迟发送错误消息
-            root.after(100,
-                       lambda path=icon_path, err=e: thread_handler.log_message(f"尝试加载图标 {path} 失败: {err}"))
+            thread_handler.log_message(f"尝试加载图标 {icon_path} 失败: {e}")
             continue
 
     if not icon_loaded:
-        # 使用延迟发送警告消息
-        root.after(100, lambda: thread_handler.log_message("警告: 无法加载任何图标文件，将使用默认图标"))
+        thread_handler.log_message("警告: 无法加载任何图标文件，将使用默认图标")
 
 
 def create_main_interface(root, app, thread_handler):
     """创建主界面组件"""
     # 延迟设置窗口图标，确保消息队列处理已启动
-    root.after(100, lambda: set_window_icon(root, thread_handler))
+    set_window_icon(root, thread_handler)
 
     components = {}
 
@@ -88,12 +83,12 @@ def create_main_interface(root, app, thread_handler):
                                           state="readonly",
                                           width=8)
     components['combobox'].pack(side=tk.LEFT, padx=(10, 0))
-    components['combobox'].current(0)  # 设置默认值
+    components['combobox'].current(3)  # 设置默认值
 
     # 绑定下拉选择框事件
     def on_select(event):
         selected_value = components['combobox'].get()
-        thread_handler.log_message(f"选择了: {selected_value}")
+        #thread_handler.log_message(f"选择了: {selected_value}")
 
         # 根据选择更新账号后缀
         if selected_value == "1.移动":
@@ -126,7 +121,7 @@ def create_main_interface(root, app, thread_handler):
     status_frame.pack(fill=tk.BOTH, expand=True, pady=10)
 
     # 滚动文本框用于显示详细信息
-    components['log_text'] = scrolledtext.ScrolledText(status_frame, height=15, width=70)
+    components['log_text'] = scrolledtext.ScrolledText(status_frame, height=15, width=70, font=("黑体", 12))
     components['log_text'].pack(fill=tk.BOTH, expand=True)
     components['log_text'].config(state=tk.DISABLED)
 

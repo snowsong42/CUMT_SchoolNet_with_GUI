@@ -1,8 +1,16 @@
 import tkinter as tk
-from gui.main_window import NetworkGUI
+import ctypes
+
 
 def main():
+    # 设置DPI感知（仅Windows）
+    try:
+        ctypes.windll.shcore.SetProcessDpiAwareness(1)
+    except:
+        pass
+
     root = tk.Tk()
+    from gui.main_window import NetworkGUI
     app = NetworkGUI(root)
 
     def on_closing():
@@ -12,6 +20,7 @@ def main():
 
     root.protocol("WM_DELETE_WINDOW", on_closing)
     root.mainloop()
+
 
 if __name__ == "__main__":
     main()
