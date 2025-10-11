@@ -25,6 +25,7 @@ imports:
  &#8226;   <a href="#collections">collections</a>
  &#8226;   <a href="#collections.abc">collections.abc</a>
  &#8226;   <a href="#copyreg">copyreg</a>
+ &#8226;   <a href="#ctypes">ctypes</a>
  &#8226;   <a href="#encodings">encodings</a>
  &#8226;   <a href="#encodings.aliases">encodings.aliases</a>
  &#8226;   <a href="#encodings.ascii">encodings.ascii</a>
@@ -6693,6 +6694,7 @@ imported by:
  &#8226;   <a href="#ctypes.macholib">ctypes.macholib</a>
  &#8226;   <a href="#ctypes.util">ctypes.util</a>
  &#8226;   <a href="#ctypes.wintypes">ctypes.wintypes</a>
+ &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#mouseinfo">mouseinfo</a>
  &#8226;   <a href="#multiprocessing.sharedctypes">multiprocessing.sharedctypes</a>
  &#8226;   <a href="#numpy._core._dtype_ctypes">numpy._core._dtype_ctypes</a>
@@ -10634,6 +10636,7 @@ imports:
  &#8226;   <a href="#sys">sys</a>
  &#8226;   <a href="#tkinter">tkinter</a>
  &#8226;   <a href="#tkinter.scrolledtext">tkinter.scrolledtext</a>
+ &#8226;   <a href="#tkinter.ttk">tkinter.ttk</a>
 
   </div>
   <div class="import">
@@ -10654,10 +10657,8 @@ imports:
  &#8226;   <a href="#network.connection">network.connection</a>
  &#8226;   <a href="#pyautogui">pyautogui</a>
  &#8226;   <a href="#queue">queue</a>
- &#8226;   <a href="#threading">threading</a>
- &#8226;   <a href="#time">time</a>
  &#8226;   <a href="#tkinter">tkinter</a>
- &#8226;   <a href="#tkinter.scrolledtext">tkinter.scrolledtext</a>
+ &#8226;   <a href="#tkinter.messagebox">tkinter.messagebox</a>
  &#8226;   <a href="#utils.quotes_manager">utils.quotes_manager</a>
  &#8226;   <a href="#utils.settings">utils.settings</a>
  &#8226;   <a href="#utils.threading_utils">utils.threading_utils</a>
@@ -13287,7 +13288,6 @@ imported by:
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
     <a href="#network">network</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
  &#8226;   <a href="#requests">requests</a>
  &#8226;   <a href="#socket">socket</a>
  &#8226;   <a href="#threading">threading</a>
@@ -21184,13 +21184,10 @@ imports:
   <div class="import">
 imported by:
     <a href="#gui.main_window">gui.main_window</a>
- &#8226;   <a href="#network.connection">network.connection</a>
  &#8226;   <a href="#pyautogui">pyautogui</a>
  &#8226;   <a href="#pyautogui._pyautogui_osx">pyautogui._pyautogui_osx</a>
  &#8226;   <a href="#pyautogui._pyautogui_win">pyautogui._pyautogui_win</a>
  &#8226;   <a href="#pyautogui._pyautogui_x11">pyautogui._pyautogui_x11</a>
- &#8226;   <a href="#utils.settings">utils.settings</a>
- &#8226;   <a href="#utils.threading_utils">utils.threading_utils</a>
 
   </div>
 
@@ -21433,6 +21430,7 @@ imported by:
     <a href="#pyautogui">pyautogui</a>
  &#8226;   <a href="#pymsgbox">pymsgbox</a>
  &#8226;   <a href="#pymsgbox._native_win">pymsgbox._native_win</a>
+ &#8226;   <a href="#utils.threading_utils">utils.threading_utils</a>
 
   </div>
 
@@ -21604,6 +21602,7 @@ imported by:
  &#8226;   <a href="#multiprocessing.queues">multiprocessing.queues</a>
  &#8226;   <a href="#setuptools._vendor.more_itertools.more">setuptools._vendor.more_itertools.more</a>
  &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
+ &#8226;   <a href="#utils.threading_utils">utils.threading_utils</a>
 
   </div>
 
@@ -27816,7 +27815,6 @@ imported by:
  &#8226;   <a href="#concurrent.futures._base">concurrent.futures._base</a>
  &#8226;   <a href="#concurrent.futures.process">concurrent.futures.process</a>
  &#8226;   <a href="#concurrent.futures.thread">concurrent.futures.thread</a>
- &#8226;   <a href="#gui.main_window">gui.main_window</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
  &#8226;   <a href="#importlib.util">importlib.util</a>
  &#8226;   <a href="#logging">logging</a>
@@ -27887,7 +27885,6 @@ imported by:
  &#8226;   <a href="#email.generator">email.generator</a>
  &#8226;   <a href="#email.utils">email.utils</a>
  &#8226;   <a href="#gc">gc</a>
- &#8226;   <a href="#gui.main_window">gui.main_window</a>
  &#8226;   <a href="#gzip">gzip</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
  &#8226;   <a href="#http.cookies">http.cookies</a>
@@ -27960,10 +27957,28 @@ imported by:
  &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#mouseinfo">mouseinfo</a>
  &#8226;   <a href="#pymsgbox">pymsgbox</a>
+ &#8226;   <a href="#tkinter.commondialog">tkinter.commondialog</a>
  &#8226;   <a href="#tkinter.constants">tkinter.constants</a>
+ &#8226;   <a href="#tkinter.messagebox">tkinter.messagebox</a>
  &#8226;   <a href="#tkinter.scrolledtext">tkinter.scrolledtext</a>
  &#8226;   <a href="#tkinter.ttk">tkinter.ttk</a>
  &#8226;   <a href="#utils.threading_utils">utils.threading_utils</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="tkinter.commondialog"></a>
+  <a target="code" href="///C:/Users/hp/AppData/Local/Programs/Python/Python312/Lib/tkinter/commondialog.py" type="text/plain"><tt>tkinter.commondialog</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#tkinter">tkinter</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#tkinter.messagebox">tkinter.messagebox</a>
 
   </div>
 
@@ -27987,6 +28002,24 @@ imported by:
 </div>
 
 <div class="node">
+  <a name="tkinter.messagebox"></a>
+  <a target="code" href="///C:/Users/hp/AppData/Local/Programs/Python/Python312/Lib/tkinter/messagebox.py" type="text/plain"><tt>tkinter.messagebox</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#tkinter">tkinter</a>
+ &#8226;   <a href="#tkinter.commondialog">tkinter.commondialog</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#gui.main_window">gui.main_window</a>
+ &#8226;   <a href="#utils.settings">utils.settings</a>
+
+  </div>
+
+</div>
+
+<div class="node">
   <a name="tkinter.scrolledtext"></a>
   <a target="code" href="///C:/Users/hp/AppData/Local/Programs/Python/Python312/Lib/tkinter/scrolledtext.py" type="text/plain"><tt>tkinter.scrolledtext</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
@@ -27998,7 +28031,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#gui.components">gui.components</a>
- &#8226;   <a href="#gui.main_window">gui.main_window</a>
  &#8226;   <a href="#tkinter">tkinter</a>
 
   </div>
@@ -28015,7 +28047,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#mouseinfo">mouseinfo</a>
+    <a href="#gui.components">gui.components</a>
+ &#8226;   <a href="#mouseinfo">mouseinfo</a>
  &#8226;   <a href="#tkinter">tkinter</a>
 
   </div>
@@ -30364,8 +30397,8 @@ imported by:
 imports:
     <a href="#json">json</a>
  &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
  &#8226;   <a href="#sys">sys</a>
+ &#8226;   <a href="#tkinter.messagebox">tkinter.messagebox</a>
  &#8226;   <a href="#utils">utils</a>
 
   </div>
@@ -30382,7 +30415,8 @@ imported by:
   <a target="code" href="///D:/coding/project/python/Tools/schoolnet/utils/threading_utils.py" type="text/plain"><tt>utils.threading_utils</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#pyautogui">pyautogui</a>
+    <a href="#pymsgbox">pymsgbox</a>
+ &#8226;   <a href="#queue">queue</a>
  &#8226;   <a href="#time">time</a>
  &#8226;   <a href="#tkinter">tkinter</a>
  &#8226;   <a href="#utils">utils</a>

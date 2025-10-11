@@ -79,16 +79,15 @@ class NetworkConnection:
             self.thread_handler.log_message(f"检测到本机IP: {self.local_ip}")
 
             full_account = account_number + combobox
-            self.thread_handler.log_message(f"使用账号: {account_number}****")
-            self.thread_handler.log_message(f"账号完整格式: {full_account}")
+            self.thread_handler.log_message(f"使用账号: {full_account}")
 
             # 准备登录数据
             #data = self._prepare_login_data(full_account, password)
             headers = {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
             }
-
-            self.thread_handler.log_message("开始登录校园网认证...\n" + "=" * 20)
+            self.thread_handler.print_message("=" * 20)
+            self.thread_handler.log_message("开始登录校园网认证...")
 
             # 发送登录请求
             param = {
@@ -117,7 +116,8 @@ class NetworkConnection:
             # 正常情况
             time.sleep(1)  # 等待登录生效
             # 检查互联网连接
-            self.thread_handler.log_message("检查Internet连通性，尝试访问百度\n" + "=" * 20)
+            self.thread_handler.print_message("=" * 20)
+            self.thread_handler.log_message("检查Internet连通性，尝试访问百度")
             if self.check_internet_connection():
                 success_msg = f"登录成功！\n本机IP: {self.local_ip}\nInternet连接正常"
                 self.thread_handler.log_message("网络登录成功，Internet连接正常")
@@ -128,7 +128,8 @@ class NetworkConnection:
                 self.thread_handler.show_alert('连接状态待确认', warning_msg, '知道了')
 
             # 检查校园网内部连接
-            self.thread_handler.log_message("检查校园网内部连接，尝试矿大教务系统\n" + "=" * 20)
+            self.thread_handler.print_message("=" * 20)
+            self.thread_handler.log_message("检查校园网内部连接，尝试矿大教务系统")
             if not self.check_local_network():
                 self.thread_handler.log_message("错误: 无法连接到校园内网")
                 self.thread_handler.show_alert('校园网连接错误',
@@ -145,8 +146,8 @@ class NetworkConnection:
             self._handle_connection_error(f"发生未知错误 - {e}", f"发生未知错误: {str(e)}")
         finally:
             """完成连接过程"""
-            self.thread_handler.log_message("")
-            self.thread_handler.log_message("“长征”回报：连接过程执行完毕\n" + "=" * 20)
+            self.thread_handler.print_message("=" * 20)
+            self.thread_handler.log_message("“长征”回报：连接过程执行完毕")
             self.thread_handler.show_random_quote()
             self.thread_handler.set_button_state("normal", "连接网络")
             self.is_connecting = False

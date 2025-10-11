@@ -1,15 +1,15 @@
 1.生成spec文件
 pyi-makespec --onefile main.py
 
-2.运行spec文件打包
-pyinstaller main.spec
-
-3.资源文件
+2.资源文件
 datas=[
     ('./resource/矿大LOGO_1024x1024.ico', '.'),  # 图标文件
     ('./resource/Loji_quotes.txt', '.'),  # 留言文件
     ('./UserData', 'UserData')  # 用户数据目录
 ],
 
-4.图标
+3.图标
 icon='./resource/TFRico_2048x2048.ico'
+
+4.运行spec文件打包
+pyinstaller main.spec

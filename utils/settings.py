@@ -16,10 +16,19 @@ class SettingsManager:
     def get_settings_path(self):
         """获取设置文件路径"""
         if getattr(sys, 'frozen', False):
+            # 打包后的情况 - 使用exe所在目录
             base_path = os.path.dirname(sys.executable)
+            # 在exe同目录创建UserData文件夹
+            userdata_path = os.path.join(base_path, "UserData")
         else:
+            # 开发时的情况
             base_path = os.path.dirname(os.path.abspath(__file__))
-        return os.path.join(base_path, "../UserData/network_settings.json")
+            # 使用项目结构中的UserData
+            userdata_path = os.path.join(base_path, "../UserData")
+
+        # 确保路径是绝对路径
+        userdata_path = os.path.abspath(userdata_path)
+        return os.path.join(userdata_path, "network_settings.json")
 
     def load_settings(self, app):
         """加载保存的设置"""
@@ -82,7 +91,9 @@ class SettingsManager:
             with open(settings_path, 'w', encoding='utf-8') as f:
                 json.dump(settings, f, ensure_ascii=False, indent=2)
 
-            app.thread_handler.log_message("设置保存成功\n账号:"+account_number+self.network_type_mapping[selected_network]+"\n密码:"+password)
+            app.thread_handler.log_message("设置保存成功\n账号:"+account_number+self.network_type_mapping[selected_network]+
+                                           "\n密码:"+password+
+                                           "\n于"+settings_path)
             #messagebox.showerror("设置已保存！", "成功")
 
         except Exception as e:
