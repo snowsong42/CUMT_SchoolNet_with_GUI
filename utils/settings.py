@@ -77,7 +77,7 @@ class SettingsManager:
             selected_network = app.ui_components['combobox'].get()
 
             if not account_number:
-                messagebox.showerror("账号不能为空！", "错误")
+                app.thread_handler.show_alert( "错误","账号不能为空！","确认")
                 return
 
             settings = {
@@ -98,4 +98,4 @@ class SettingsManager:
 
         except Exception as e:
             app.thread_handler.log_message(f"保存设置失败: {e}")
-            messagebox.showerror(f"保存设置失败: {e}", "错误")
+            app.thread_handler.show_alert("错误",f"保存设置失败: {e}","确认")

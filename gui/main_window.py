@@ -85,12 +85,10 @@ class NetworkGUI:
             account_suffix = ""
 
         if not account_number:
-            import pyautogui as pg
-            messagebox.showerror("请输入账号！", "错误")
+            self.thread_handler.show_alert("错误", "请输入账号！","确认")
             return
         if not password:
-            import pyautogui as pg
-            messagebox.showerror("请输入密码！", "错误")
+            self.thread_handler.show_alert("错误", "请输入密码！","确认")
             return
 
         # 见connection.py
