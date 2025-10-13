@@ -36,6 +36,9 @@ class NetworkGUI:
         self.settings_manager.load_settings(self) # 加载设置
         self.quotes_manager.load_Loji_quotes() # 加载留言
 
+        # 启动时相当于自动点击一次“开始连接”！
+        self.start_connection_thread()
+
     def show_Loji_words(self):
         quote = self.quotes_manager.get_random_quote()
         self.thread_handler.log_message(f"{quote}")
@@ -56,7 +59,7 @@ class NetworkGUI:
 
     def start_connection_thread(self):
         """在新线程中启动连接过程"""
-        # 1. 验证输入
+        # 1. 拿到输入并验证
         # 2. 创建新线程
         # 3. 在新线程中执行网络连接
         if self.network_connection.is_connecting:

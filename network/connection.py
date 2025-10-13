@@ -14,6 +14,7 @@ class NetworkConnection:
 
     def start_connection(self, account_number, password,combobox):
         """启动连接过程"""
+        # 2. 创建新线程
         self.is_connecting = True
         self.thread_handler.set_button_state("disabled", "连接中...")
 
