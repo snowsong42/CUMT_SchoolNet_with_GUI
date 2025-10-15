@@ -120,18 +120,20 @@ class NetworkConnection:
             self.thread_handler.print_message("=" * 20)
             self.thread_handler.log_message("检查Internet连通性，尝试访问百度")
             if self.check_internet_connection():
-                success_msg = f"登录成功！\n本机IP: {self.local_ip}\nInternet连接正常"
                 self.thread_handler.log_message("网络登录成功，Internet连接正常")
-                self.thread_handler.show_alert('连接成功(oﾟvﾟ)ノ', success_msg, '冲浪，冲！')
             else:
                 warning_msg = f"登录请求已发送，但外部网络连接可能尚未建立\n状态码: {response.status_code}\n请稍后手动检查网络连接"
                 self.thread_handler.log_message("登录请求成功，但外部互联网连接检查失败")
                 self.thread_handler.show_alert('连接状态待确认', warning_msg, '知道了')
+                return
 
             # 检查校园网内部连接
             self.thread_handler.print_message("=" * 20)
             self.thread_handler.log_message("检查校园网内部连接，尝试矿大教务系统")
-            if not self.check_local_network():
+            if self.check_local_network():
+                success_msg = f"登录成功！\n本机IP: {self.local_ip}\nInternet连接正常"
+                self.thread_handler.show_alert('连接成功(oﾟvﾟ)ノ', success_msg, '冲浪，冲！')
+            else:
                 self.thread_handler.log_message("错误: 无法连接到校园内网")
                 self.thread_handler.show_alert('校园网连接错误',
                                                '无法连接到校园内网，请检查网络连接或联系网络管理员！',
